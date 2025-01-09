@@ -1,0 +1,92 @@
+/* Ogólne style */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #4CAF50, #87CEEB);
+    color: #fff;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Nagłówek */
+header {
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.5rem;
+}
+
+/* Główna zawartość */
+main {
+    flex: 1;
+    padding: 20px;
+}
+
+section {
+    margin: 20px auto;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    max-width: 600px;
+}
+
+/* Przycisk */
+button {
+    background-color: #ffffff;
+    color: #4CAF50;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background-color: #4CAF50;
+    color: #ffffff;
+    transform: scale(1.05);
+}
+
+/* Teksty */
+h2 {
+    margin-top: 0;
+    font-size: 1.8rem;
+}
+
+p {
+    font-size: 1rem;
+    margin: 10px 0;
+}
+
+/* Stopka */
+footer {
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 10px;
+    font-size: 0.9rem;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsywność */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2rem;
+    }
+
+    button {
+        font-size: 0.9rem;
+        padding: 8px 16px;
+    }
+
+    section {
+        padding: 15px;
+    }
+}
