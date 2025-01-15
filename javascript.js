@@ -14,7 +14,7 @@ locationButton.addEventListener('click', () => {
 // Pobierz dane pogodowe
 async function fetchWeather(position) {
     const { latitude, longitude } = position.coords;
-    const apiKey = 'YOUR_API_KEY'; // Wstaw klucz API z OpenWeatherMap
+    const apiKey = '83a4e536c6cc9f7b61410fa93df99220'; // Wstaw klucz API z OpenWeatherMap
     const apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=${apiKey}`;
 
     try {
@@ -39,10 +39,11 @@ function showError(error) {
 
 // Zarejestruj Service Workera
 if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('service-worker.js')
+    navigator.serviceWorker.register('./serwice-worker.js')  
         .then(() => console.log('Service Worker registered'))
         .catch(error => console.error('Service Worker registration failed:', error));
 }
+
 
 // Sprawdź, czy użytkownik jest offline
 window.addEventListener('offline', () => {
@@ -51,3 +52,12 @@ window.addEventListener('offline', () => {
 window.addEventListener('online', () => {
     offlineInfo.style.display = 'none';
 });
+document.getElementById("navigateButton").addEventListener("click", () => {
+    const page = document.body.querySelector(".page");
+    page.classList.add("exit");
+
+    setTimeout(() => {
+        window.location.href = "./hello.html";
+    }, 500); // Czas trwania animacji w ms
+});
+

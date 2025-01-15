@@ -10,8 +10,6 @@ body {
     flex-direction: column;
     min-height: 100vh;
 }
-
-/* Nagłówek */
 header {
     background-color: rgba(0, 0, 0, 0.3);
     padding: 20px;
@@ -89,4 +87,79 @@ footer {
     section {
         padding: 15px;
     }
+}
+.page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background: linear-gradient(120deg, #89f7fe, #66a6ff);
+    color: white;
+    font-family: Arial, sans-serif;
+  }
+  
+  .navigate-button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    background-color: #4caf50;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .navigate-button:hover {
+    background-color: #45a049;
+  }
+  /* Podstawowe style */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    overflow-x: hidden;
+}
+
+.page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(120deg, #89f7fe, #66a6ff);
+    color: white;
+    font-size: 2rem;
+    opacity: 1;
+    transform: translateX(0);
+    transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.page.exit {
+    opacity: 0;
+    transform: translateX(-100%);
+}
+
+.page.enter {
+    opacity: 0;
+    transform: translateX(100%);
+}
+
+.page.enter-active {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+footer button {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    background-color: #4caf50;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+footer button:hover {
+    background-color: #45a049;
 }

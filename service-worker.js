@@ -3,10 +3,8 @@ const ASSETS_TO_CACHE = [
     '/',
     '/index.html',
     '/styles.css',
-    '/headJS.js',
+    '/javascript.js',
     '/manifest.json',
-    '/icon-192x192.png',
-    '/icon-512x512.png'
 ];
 
 // Instalacja Service Workera
@@ -20,7 +18,7 @@ self.addEventListener('install', (event) => {
     );
 });
 
-// Opdalenie Service Workera
+// Aktywacja Service Workera
 self.addEventListener('activate', (event) => {
     console.log('[Service Worker] Activating...');
     event.waitUntil(
@@ -57,6 +55,43 @@ self.addEventListener('fetch', (event) => {
             if (event.request.mode === 'navigate') {
                 return caches.match('/index.html');
             }
+        })
+    );
+});
+
+// Obsługa powiadomień push
+self.addEventListener('push', (event) => {
+    console.log('[Service Worker] Push received:', event);
+
+    // Dane powiadomienia (jeśli przesłane)
+    const data = event.data ? event.data.json() : {};
+
+    const title = data.title || 'Nowa wiadomość!';
+    const options = {
+        body: data.body || 'Masz nowe powiadomienie pogodowe.',
+        icon: data.icon || '/default-icon.png',
+        badge: data.badge || '/badge-icon.png',
+    };
+
+    event.waitUntil(
+        self.registration.showNotification(title, options)
+    );
+});
+
+// Obsługa kliknięcia w powiadomienie
+self.addEventListener('notificationclick', (event) => {
+    console.log('[Service Worker] Notification click received.');
+
+    event.notification.close();
+
+    event.waitUntil(
+        clients.matchAll({ type: 'window', includeUncontrolled: true }).then((clientList) => {
+            if (clientList.length > 0) {
+                return clientList[0].focus();
+            }
+
+            // Otwórz nową kartę, jeśli aplikacja nie jest otwarta
+            return clients.openWindow('/');
         })
     );
 });
