@@ -1,8 +1,9 @@
-// Sprawdź, czy geolokalizacja jest dostępna
 const locationButton = document.getElementById('getLocation');
 const weatherInfo = document.getElementById('weatherInfo');
 const offlineInfo = document.getElementById('offlineInfo');
+const DetailWhaetresButton = document.getElementById('DetailWhaetresButton');
 
+DetailWhaetresButton
 locationButton.addEventListener('click', () => {
     if ('geolocation' in navigator) {
         navigator.geolocation.getCurrentPosition(fetchWeather, showError);
@@ -10,13 +11,10 @@ locationButton.addEventListener('click', () => {
         weatherInfo.textContent = 'Geolocation is not supported by your browser.';
     }
 });
-
-// Pobierz dane pogodowe
 async function fetchWeather(position) {
     const { latitude, longitude } = position.coords;
-    const apiKey = '83a4e536c6cc9f7b61410fa93df99220'; // Wstaw klucz API z OpenWeatherMap
+    const apiKey = '83a4e536c6cc9f7b61410fa93df99220'; 
     const apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=${apiKey}`;
-
     try {
         const response = await fetch(apiUrl);
         if (!response.ok) throw new Error('Weather data unavailable');
@@ -26,25 +24,19 @@ async function fetchWeather(position) {
         weatherInfo.textContent = 'Error fetching weather data.';
     }
 }
-
-// Zaktualizuj interfejs użytkownika
 function updateWeatherUI(data) {
     weatherInfo.textContent = `Location: ${data.name}, Temperature: ${data.main.temp}°C, Weather: ${data.weather[0].description}`;
 }
-
 // Obsłuż błędy geolokalizacji
 function showError(error) {
     weatherInfo.textContent = `Error getting location: ${error.message}`;
 }
-
 // Zarejestruj Service Workera
 if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('./serwice-worker.js')  
+    navigator.serviceWorker.register('./service-worker.js')  
         .then(() => console.log('Service Worker registered'))
         .catch(error => console.error('Service Worker registration failed:', error));
 }
-
-
 // Sprawdź, czy użytkownik jest offline
 window.addEventListener('offline', () => {
     offlineInfo.style.display = 'block';
@@ -52,7 +44,7 @@ window.addEventListener('offline', () => {
 window.addEventListener('online', () => {
     offlineInfo.style.display = 'none';
 });
-document.getElementById("navigateButton").addEventListener("click", () => {
+document.getElementById("DetailWhaetresButton").addEventListener("click", () => {
     const page = document.body.querySelector(".page");
     page.classList.add("exit");
 
@@ -60,4 +52,3 @@ document.getElementById("navigateButton").addEventListener("click", () => {
         window.location.href = "./hello.html";
     }, 500); // Czas trwania animacji w ms
 });
-
