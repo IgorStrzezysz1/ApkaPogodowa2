@@ -2,6 +2,7 @@
 .page {
     opacity: 1; /* Strona jest widoczna */
     transform: translateY(0); /* Pozycja początkowa */
+    
     transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out; /* Czas trwania i płynność animacji */
 }
 .page.exit {

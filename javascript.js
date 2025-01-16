@@ -2,6 +2,8 @@ const locationButton = document.getElementById('getLocation');
 const weatherInfo = document.getElementById('weatherInfo');
 const offlineInfo = document.getElementById('offlineInfo');
 const DetailWhaetresButton = document.getElementById('DetailWhaetresButton');
+const backButton = document.getElementById('backButton');
+
 
 DetailWhaetresButton
 locationButton.addEventListener('click', () => {
@@ -68,10 +70,13 @@ document.getElementById("DetailWhaetresButton").addEventListener("click", () => 
 
         // Przejście na inną stronę po czasie trwania animacji
         setTimeout(() => {
-            window.location.href = "./hello.html";
+            window.location.href = "./anotherPage.html";
         }, 500); // Czas trwania animacji w ms
     } else {
         console.error("Element .page nie istnieje!");
-        window.location.href = "./hello.html";
+        window.location.href = "./anotherPage.html";
     }
+});
+document.getElementById("backButton").addEventListener("click", () => {
+    window.history.back();
 });
