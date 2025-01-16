@@ -32,11 +32,26 @@ function showError(error) {
     weatherInfo.textContent = `Error getting location: ${error.message}`;
 }
 // Zarejestruj Service Workera
+// if ('serviceWorker' in navigator) {
+//     navigator.serviceWorker.register('./service-worker.js')  
+//         .then(() => console.log('Service Worker registered'))
+//         .catch(error => console.error('Service Worker registration failed:', error));
+// }
+
 if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('./service-worker.js')  
-        .then(() => console.log('Service Worker registered'))
-        .catch(error => console.error('Service Worker registration failed:', error));
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./service-worker.js')
+            .then(registration => {
+                console.log('Service Worker registered with scope:', registration.scope);
+            })
+            .catch(error => {
+                console.error('Service Worker registration failed:', error);
+            });
+    });
+} else {
+    console.log('Service Workers are not supported in this browser.');
 }
+
 // Sprawdź, czy użytkownik jest offline
 window.addEventListener('offline', () => {
     offlineInfo.style.display = 'block';
@@ -46,9 +61,17 @@ window.addEventListener('online', () => {
 });
 document.getElementById("DetailWhaetresButton").addEventListener("click", () => {
     const page = document.body.querySelector(".page");
-    page.classList.add("exit");
 
-    setTimeout(() => {
+    if (page) {
+        // Dodanie klasy exit dla animacji
+        page.classList.add("exit");
+
+        // Przejście na inną stronę po czasie trwania animacji
+        setTimeout(() => {
+            window.location.href = "./hello.html";
+        }, 500); // Czas trwania animacji w ms
+    } else {
+        console.error("Element .page nie istnieje!");
         window.location.href = "./hello.html";
-    }, 500); // Czas trwania animacji w ms
+    }
 });

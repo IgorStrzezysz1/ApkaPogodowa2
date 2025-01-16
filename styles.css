@@ -1,4 +1,13 @@
-/* Ogólne style */
+
+.page {
+    opacity: 1; /* Strona jest widoczna */
+    transform: translateY(0); /* Pozycja początkowa */
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out; /* Czas trwania i płynność animacji */
+}
+.page.exit {
+    opacity: 0; /* Strona staje się niewidoczna */
+    transform: translateY(-20px); /* Przesunięcie strony w górę */
+}
 body {
     font-family: 'Arial', sans-serif;
     margin: 0;
@@ -20,8 +29,6 @@ header h1 {
     margin: 0;
     font-size: 2.5rem;
 }
-
-/* Główna zawartość */
 main {
     flex: 1;
     padding: 20px;
@@ -94,7 +101,6 @@ footer {
     align-items: center;
     justify-content: center;
     height: 100vh;
-    background: linear-gradient(120deg, #89f7fe, #66a6ff);
     color: white;
     font-family: Arial, sans-serif;
   }
@@ -119,24 +125,6 @@ body {
     margin: 0;
     font-family: Arial, sans-serif;
     overflow-x: hidden;
-}
-
-.page {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background: linear-gradient(120deg, #89f7fe, #66a6ff);
-    color: white;
-    font-size: 2rem;
-    opacity: 1;
-    transform: translateX(0);
-    transition: transform 0.5s ease, opacity 0.5s ease;
-}
-
-.page.exit {
-    opacity: 0;
-    transform: translateX(-100%);
 }
 
 .page.enter {
