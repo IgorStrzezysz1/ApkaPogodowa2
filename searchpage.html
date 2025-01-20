@@ -1,44 +1,44 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./styles.css">
-    <script src="./searchpage.js" defer></script>
-    <title>Weather Search</title>
-    <style>
-        /* Stylizacja dla animacji slide-up */
-        .slide-up {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #bba45a, #87CEEB);
-            transform: translateY(100%);
-            transition: transform 0.8s ease-in-out;
-            z-index: 9999;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./styles.css">
+  <script src="./searchpage.js" defer></script>
+  <title>Weather Search</title>
+  <style>
+    /* Stylizacja dla animacji slide-up */
+    .slide-up {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #bba45a, #87CEEB);
+      transform: translateY(100%);
+      transition: transform 0.8s ease-in-out;
+      z-index: 9999;
+    }
 
-        .slide-up.active {
-            transform: translateY(0);
-        }
-    </style>
+    .slide-up.active {
+      transform: translateY(0);
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <h1>Weather Search</h1>
-    </header>
-    <main>
-        <form id="searchForm">
-            <input type="text" id="cityInput" class="input-search" placeholder="Enter city name" required>
-            <button type="submit" id="btn-search">Search</button>
-        </form>
-        <div id="searchResult" class="slide-up"></div>
-        <button id="goBackButton">Go Back</button> <!-- Przycisk Go Back jest zawsze widoczny -->
-        <span class="error-message"></span>
-    </main>
+  <header>
+    <h1>Weather Search</h1>
+  </header>
+  <main>
+    <form id="searchForm">
+      <input type="text" id="cityInput" class="input-search" placeholder="Enter city name" required>
+      <button type="submit" id="btn-search">Search</button>
+    </form>
+    <div id="searchResult" class="slide-up"></div>
+    <button id="goBackButton">Go Back</button>
+    <button id="goBacToSearchbar">Go Back to Search bar</button> <span class="error-message"></span>
+  </main>
 
-    <div class="slide-up" id="slideUpAnimation"></div>
+  <div class="slide-up" id="slideUpAnimation"></div>
 </body>
 </html>
