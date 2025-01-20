@@ -1,8 +1,6 @@
 const inputSearch = document.querySelector(".input-search");
 const btnSearch = document.querySelector("#btn-search");
 const errorMessageSpan = document.querySelector(".error-message");
-const weatherLocationHeading = document.querySelector(".weatherLocation");
-const weatherTempHeading = document.querySelector(".weatherTemp");
 const searchForm = document.getElementById("searchForm");
 const searchResult = document.getElementById("searchResult");
 const goBackButton = document.getElementById("goBackButton");
@@ -10,11 +8,6 @@ const slideUp = document.getElementById("slideUpAnimation");
 
 // Funkcja do aktualizacji interfejsu po wyszukaniu pogody
 function updateSearchWeatherUi(data) {
-    weatherLocationHeading.textContent = `Location: ${data.name}`;
-    weatherTempHeading.textContent = `Temperature: ${data.main.temp}°C`;
-    errorMessageSpan.textContent = ""; // Wyczyszczenie błędu, jeśli poprzednio wystąpił
-
-    // Wyświetlenie wyników z animacją
     searchResult.innerHTML = `
         <p class="weatherLocation">Location: ${data.name}</p>
         <p class="weatherCountry">Country: ${data.sys.country}</p>
@@ -23,7 +16,6 @@ function updateSearchWeatherUi(data) {
         <img class="weatherImg" src="http://openweathermap.org/img/wn/${data.weather[0].icon}.png" alt="${data.weather[0].description}">
     `;
     searchResult.classList.add("active");
-    goBackButton.style.display = "block"; // Pokazanie przycisku "Go Back"
 }
 
 // Funkcja do wyszukiwania pogody dla podanego miasta
@@ -57,10 +49,10 @@ searchForm.addEventListener("submit", async (e) => {
 goBackButton.addEventListener("click", () => {
     slideUp.classList.add("active"); // Uruchomienie animacji
     setTimeout(() => {
-        slideUp.classList.remove("active"); // Cofnięcie animacji
         searchResult.classList.remove("active"); // Ukrycie wyników
-        goBackButton.style.display = "none"; // Ukrycie przycisku "Go Back"
         inputSearch.value = ""; // Wyczyszczenie pola wyszukiwania
         errorMessageSpan.textContent = ""; // Wyczyszczenie błędów
-    }, 3000); // Zmieniony czas trwania animacji na 3 sekundy
+        slideUp.classList.remove("active"); // Cofnięcie animacji
+        window.location.href = "index.html"; // Przekierowanie na stronę index.html
+    }, 2500); // Zmieniony czas trwania animacji na 3 sekundy
 });

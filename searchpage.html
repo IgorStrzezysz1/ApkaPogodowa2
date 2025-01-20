@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="pl">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./styles.css">
+    <script src="./searchpage.js" defer></script>
     <title>Weather Search</title>
-    <link rel="stylesheet" href="./styles.css">
     <style>
         /* Stylizacja dla animacji slide-up */
         .slide-up {
@@ -26,65 +25,20 @@
         }
     </style>
 </head>
-
 <body>
     <header>
         <h1>Weather Search</h1>
     </header>
     <main>
         <form id="searchForm">
-            <input type="text" id="cityInput" placeholder="Enter city name" required>
-            <button type="submit">Search</button>
+            <input type="text" id="cityInput" class="input-search" placeholder="Enter city name" required>
+            <button type="submit" id="btn-search">Search</button>
         </form>
         <div id="searchResult" class="slide-up"></div>
-        <button id="goBackButton">Go Back</button>
+        <button id="goBackButton">Go Back</button> <!-- Przycisk Go Back jest zawsze widoczny -->
+        <span class="error-message"></span>
     </main>
 
-    <!-- Element animacji slide-up -->
     <div class="slide-up" id="slideUpAnimation"></div>
-
-    <script>
-        const searchForm = document.getElementById('searchForm');
-        const cityInput = document.getElementById('cityInput');
-        const searchResult = document.getElementById('searchResult');
-        const goBackButton = document.getElementById('goBackButton');
-        const slideUp = document.getElementById('slideUpAnimation');
-
-        // Obsługa formularza wyszukiwania
-        searchForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const city = cityInput.value.trim();
-            const apiKey = '83a4e536c6cc9f7b61410fa93df99220';
-            const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
-
-            try {
-                const response = await fetch(apiUrl);
-                if (!response.ok) throw new Error('City not found');
-                const data = await response.json();
-
-                // Wyświetlenie wyników z animacją
-                searchResult.innerHTML = `
-                    <p class="weatherLocation">Location: ${data.name}</p>
-                    <p class="weatherCountry">Country: ${data.sys.country}</p>
-                    <p class="weatherTemp">Temperature: ${data.main.temp}°C</p>
-                    <p class="weatherInfo">Weather: ${data.weather[0].description}</p>
-                    <img class="weatherImg" src="http://openweathermap.org/img/wn/${data.weather[0].icon}.png" alt="${data.weather[0].description}">
-                `;
-                searchResult.classList.add('active');
-                setTimeout(() => searchResult.classList.remove('active'), 800); // Animacja powrotu
-            } catch (error) {
-                alert('Error: ' + error.message);
-            }
-        });
-
-        // Obsługa przycisku "Go Back" z animacją slide-up
-        goBackButton.addEventListener('click', () => {
-            slideUp.classList.add('active'); // Uruchomienie animacji
-            setTimeout(() => {
-                window.history.back(); // Powrót po zakończeniu animacji
-            }, 800); // Czas trwania animacji w ms
-        });
-    </script>
 </body>
-
 </html>
