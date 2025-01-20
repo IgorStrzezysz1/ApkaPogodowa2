@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather History</title>
+    <link rel="stylesheet" href="./styles.css">
+    <style>
+        /* Stylizacja dla animacji slide-up */
+        .slide-up {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #bba45a, #87CEEB);
+            transform: translateY(100%);
+            transition: transform 0.8s ease-in-out;
+            z-index: 9999;
+        }
+
+        .slide-up.active {
+            transform: translateY(0);
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Weather History</h1>
+    </header>
+    <main>
+        <ul id="historyList"></ul>
+        <button id="clearHistory">Clear History</button>
+        <button id="goBackButton">Go Back</button>
+    </main>
+
+    <!-- Element animacji slide-up -->
+    <div class="slide-up" id="slideUpAnimation"></div>
+
+    <script>
+        const historyList = document.getElementById('historyList');
+        const clearHistory = document.getElementById('clearHistory');
+        const slideUp = document.getElementById('slideUpAnimation');
+        const goBackButton = document.getElementById('goBackButton');
+
+        // Load history from Local Storage
+        const loadHistory = () => {
+            const history = JSON.parse(localStorage.getItem('weatherHistory')) || [];
+            historyList.innerHTML = history.map(item => `<li>${item}</li>`).join('');
+        };
+
+        // Clear history
+        clearHistory.addEventListener('click', () => {
+            localStorage.removeItem('weatherHistory');
+            loadHistory();
+        });
+
+        // Obsługa przycisku "Go Back" z animacją slide-up
+        goBackButton.addEventListener('click', () => {
+            slideUp.classList.add('active'); // Uruchomienie animacji
+            setTimeout(() => {
+                window.history.back(); // Powrót po zakończeniu animacji
+            }, 800); // Czas trwania animacji w ms
+        });
+
+        loadHistory();
+    </script>
+</body>
+
+</html>

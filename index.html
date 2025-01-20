@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,27 +8,67 @@
     <link rel="manifest" href="./manifest.json">
     <title>Weather App</title>
     <link rel="stylesheet" href="./styles.css">
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .slide-down {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #bba45a, #87CEEB);
+            transform: translateY(-100%);
+            transition: transform 0.8s ease-in-out;
+            z-index: 9999;
+        }
+
+        .slide-down.active {
+            transform: translateY(0);
+        }
+    </style>
 </head>
+
 <body>
     <header>
-        <h1>Weather App</h1>
+        <h1>Weather App by Igor Strzeżysz</h1>
     </header>
     <main>
         <section id="location">
-            <button id="getLocation">Get Weather for My Location</button>
+            <button id="detailWeatherButton">Details of Weather</button>
+            <button id="navigate-to-search">Go to Weather Search</button>
+            <button id="navigate-to-history">Weather History</button>
         </section>
-        <section id="weather">
-            <h2>Current Weather</h2>
-            <p id="weatherInfo">No data available</p>
-        </section>
-
-       
-        <button id="DetailWhaetresButton">Details of wheater</button>
-
-        <div class="page">
     </main>
-    <footer>
-    </footer>
-    <script src="./javascript.js"></script>
+    <footer></footer>
+
+    <div class="slide-down" id="slideDownAnimation"></div>
+
+    <script>
+        const slideDown = document.getElementById('slideDownAnimation');
+
+        const navigateWithAnimation = (url) => {
+            slideDown.classList.add('active');
+            setTimeout(() => {
+                window.location.href = url;
+            }, 800);
+        };
+
+        document.getElementById('detailWeatherButton').addEventListener('click', () => {
+            navigateWithAnimation('./detailsWheater.html');
+        });
+
+        document.getElementById('navigate-to-search').addEventListener('click', () => {
+            navigateWithAnimation('./searchpage.html');
+        });
+
+        document.getElementById('navigate-to-history').addEventListener('click', () => {
+            navigateWithAnimation('./historyWheater.html');
+        });
+    </script>
 </body>
+
 </html>
