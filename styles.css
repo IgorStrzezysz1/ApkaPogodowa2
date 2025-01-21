@@ -183,3 +183,11 @@ footer button:hover {
 .slide-up.active {
     transform: translateY(0); /* Pozostaje widoczny */
 }
+
+#goBackToSearchBar {
+  position: relative; /* Upewnij się, że przycisk jest pozycjonowany względem swojego rodzica */
+  z-index: 1; /* Ustaw wyższy z-index, aby przycisk był na wierzchu */
+  background-color: white; /* Przykładowy kolor tła przycisku */
+  /* ... inne style */
+}
+

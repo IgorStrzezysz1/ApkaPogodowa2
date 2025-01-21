@@ -121,3 +121,4 @@ window.addEventListener('offline', () => {
 window.addEventListener('online', () => {
     if (offlineInfo) offlineInfo.style.display = 'none';
 });
+

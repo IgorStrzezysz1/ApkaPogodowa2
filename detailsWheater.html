@@ -2,98 +2,72 @@
 <html lang="pl">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Details of Weather</title>
-    <link rel="stylesheet" href="./styles.css">
-    <style>
-        .slide-up {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #bba45a, #87CEEB);
-            transform: translateY(100%);
-            transition: transform 0.8s ease-in-out;
-            z-index: 9999;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weather's Details</title>
+  <link rel="manifest" href="./manifest.json">
+  
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+    .slide-up {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #bba45a, #87CEEB);
+      transform: translateY(100%);
+      transition: transform 0.8s ease-in-out;
+      z-index: 9999;
+    }
 
-        .slide-up.active {
-            transform: translateY(0);
-        }
-    </style>
+    .slide-up.active {
+      transform: translateY(0);
+    }
+
+    #weatherDetails {
+      margin: 20px;
+    }
+
+    input[type="text"],
+    button {
+      padding: 10px;
+      margin: 5px 0;
+      font-size: 16px;
+    }
+
+    button {
+      cursor: pointer;
+      background-color: #87CEEB;
+      border: none;
+      border-radius: 5px;
+      color: white;
+    }
+
+    button:hover {
+      background-color: #4682B4;
+    }
+  </style>
 </head>
 
 <body>
-    <header>
-        <h1>Details of Weather</h1>
-    </header>
-    <main>
-        <div id="weatherDetails">
-            <p class="weatherLocation">Loading location...</p>
-            <p class="weatherCountry">Loading country...</p>
-            <p class="weatherTemp">Loading temperature...</p>
-            <p class="weatherTempFeelLike">Loading feels like...</p>
-            <p class="weatherInfo">Loading weather info...</p>
-            <p class="weatherWindSpeed">Loading wind speed...</p>
-            <img class="weatherImg" alt="Weather Icon">
-        </div>
-        <button id="goBackButton">Go Back</button>
-    </main>
+  <header>
+    <h1>Weather's Details</h1>
+  </header>
+  <main>
+    <div id="weatherDetails">
+      <input type="text" id="cityInput" placeholder="Enter city name">
+      <button id="searchButton">Search</button>
+      <p class="weatherLocation">Loading location...</p>
+      <p class="weatherCountry">Loading country...</p>
+      <p class="weatherTemp">Loading temperature...</p>
+      <p class="weatherTempFeelLike">Loading feels like...</p>
+      <p class="weatherInfo">Loading weather info...</p>
+      <p class="weatherWindSpeed">Loading wind speed...</p>
+      <img class="weatherImg" alt="Weather Icon">
+      <button id="goBackButton">Go Back</button>
+    </div>
+  </main>
 
-    <div class="slide-up" id="slideUpAnimation"></div>
-
-    <script>
-        const apiKey = '83a4e536c6cc9f7b61410fa93df99220';
-        const weatherLocation = document.querySelector('.weatherLocation');
-        const weatherCountry = document.querySelector('.weatherCountry');
-        const weatherTemp = document.querySelector('.weatherTemp');
-        const weatherTempFeelLike = document.querySelector('.weatherTempFeelLike');
-        const weatherInfoDetails = document.querySelector('.weatherInfo');
-        const weatherWindSpeed = document.querySelector('.weatherWindSpeed');
-        const weatherImg = document.querySelector('.weatherImg');
-        const slideUp = document.getElementById('slideUpAnimation');
-        const goBackButton = document.getElementById('goBackButton');
-
-        async function fetchWeather(position) {
-            const { latitude, longitude } = position.coords;
-            const apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`;
-
-            try {
-                const response = await fetch(apiUrl);
-                if (!response.ok) throw new Error('Weather data unavailable');
-                const data = await response.json();
-                updateWeatherUI(data);
-            } catch (error) {
-                console.error('Error fetching weather data:', error);
-            }
-        }
-
-        function updateWeatherUI(data) {
-            weatherLocation.textContent = `Location: ${data.name}`;
-            weatherCountry.textContent = `Country: ${data.sys.country}`;
-            weatherTemp.textContent = `Temperature: ${data.main.temp}°C`;
-            weatherTempFeelLike.textContent = `Feels Like: ${data.main.feels_like}°C`;
-            weatherInfoDetails.textContent = `Weather: ${data.weather[0].description}`;
-            weatherWindSpeed.textContent = `Wind Speed: ${data.wind.speed} m/s`;
-            weatherImg.src = `http://openweathermap.org/img/wn/${data.weather[0].icon}.png`;
-            weatherImg.alt = data.weather[0].description;
-        }
-
-        goBackButton.addEventListener('click', () => {
-            slideUp.classList.add('active');
-            setTimeout(() => {
-                window.history.back();
-            }, 800);
-        });
-
-        if ('geolocation' in navigator) {
-            navigator.geolocation.getCurrentPosition(fetchWeather, (error) => {
-                console.error('Error getting location:', error);
-            });
-        }
-    </script>
+  <div class="slide-up" id="slideUpAnimation"></div>
+  <script src="./script.js"></script>
 </body>
 
 </html>
