@@ -1,85 +1,53 @@
-const inputSearch = document.querySelector(".input-search");
-const btnSearch = document.querySelector("#btn-search");
-const errorMessageSpan = document.querySelector(".error-message");
-const searchForm = document.getElementById("searchForm");
-const searchResult = document.getElementById("searchResult");
-const goBackButton = document.getElementById("goBackButton");
-const slideUp = document.getElementById("slideUpAnimation");
-const goBacToSearchbar = document.getElementById("goBacToSearchbar");
+const apiKey = '83a4e536c6cc9f7b61410fa93df99220';
+const weatherLocation = document.querySelector('.weatherLocation');
+const weatherCountry = document.querySelector('.weatherCountry');
+const weatherTemp = document.querySelector('.weatherTemp');
+const weatherTempFeelLike = document.querySelector('.weatherTempFeelLike');
+const weatherInfoDetails = document.querySelector('.weatherInfo');
+const weatherWindSpeed = document.querySelector('.weatherWindSpeed');
+const weatherImg = document.querySelector('.weatherImg');
+const slideUp = document.getElementById('slideUpAnimation');
+const goBackButton = document.getElementById('goBackButton');
+const cityInput = document.getElementById('cityInput');
+const searchButton = document.getElementById('searchButton');
 
-// Flaga do śledzenia, czy wykonano wyszukiwanie
-let searchPerformed = false;
-
-// Funkcja aktualizująca UI wyników pogody
-function updateSearchWeatherUi(data) {
-  if (!data || !data.name || !data.sys || !data.weather || !data.main) {
-    errorMessageSpan.textContent = "Nieprawidłowe dane pogodowe. Spróbuj ponownie.";
-    return;
-  }
-
-  searchResult.innerHTML = `
-    <p class="weatherLocation">Lokalizacja: ${data.name}</p>
-    <p class="weatherCountry">Kraj: ${data.sys.country}</p>
-    <p class="weatherTemp">Temperatura: ${data.main.temp}°C</p>
-    <p class="weatherInfo">Pogoda: ${data.weather[0].description}</p>
-    <img class="weatherImg" src="http://openweathermap.org/img/wn/${data.weather[0].icon}.png" alt="${data.weather[0].description}">
-  `;
-  searchResult.classList.add("active");
-  searchPerformed = true; // Ustaw flagę na true
-  goBacToSearchbar.style.display = 'block'; // Pokaż przycisk "Go Back to Search bar"
-}
-
-// Funkcja wyszukiwania pogody dla miasta
-async function searchWeatherForCity(city) {
-  const apiKey = "83a4e536c6cc9f7b61410fa93df99220";
-  const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric&lang=pl`;
+async function fetchWeatherByCity(cityName) {
+  const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=metric`;
 
   try {
-    const res = await fetch(apiUrl);
-    if (!res.ok) throw new Error("Nie znaleziono danych pogodowych");
-    const data = await res.json();
-    updateSearchWeatherUi(data);
+    const response = await fetch(apiUrl);
+    if (!response.ok) throw new Error('City not found');
+    const data = await response.json();
+    updateWeatherUI(data);
   } catch (error) {
-    console.error(error);
-    errorMessageSpan.textContent = "Błąd pobierania danych pogodowych. Spróbuj ponownie.";
+    console.error('Error fetching weather data for city:', error);
+    alert('City not found or error fetching data');
   }
 }
 
-// Obsługa formularza wyszukiwania
-searchForm.addEventListener("submit", async (e) => {
-  e.preventDefault();
-  const city = inputSearch.value.trim();
-  if (!city) {
-    errorMessageSpan.textContent = "Wprowadź nazwę miasta.";
+function updateWeatherUI(data) {
+  weatherLocation.textContent = `Location: ${data.name}`;
+  weatherCountry.textContent = `Country: ${data.sys.country}`;
+  weatherTemp.textContent = `Temperature: ${data.main.temp}°C`;
+  weatherTempFeelLike.textContent = `Feels Like: ${data.main.feels_like}°C`;
+  weatherInfoDetails.textContent = `Weather: ${data.weather[0].description}`;
+  weatherWindSpeed.textContent = `Wind Speed: ${data.wind.speed} m/s`;
+  weatherImg.src = `http://openweathermap.org/img/wn/${data.weather[0].icon}.png`;
+  weatherImg.alt = data.weather[0].description;
+}
+
+searchButton.addEventListener('click', () => {
+  const cityName = cityInput.value.trim();
+  if (!cityName) {
+    alert('Please enter a city name');
     return;
   }
-  errorMessageSpan.textContent = ""; // Wyczyść poprzednie błędy
-  await searchWeatherForCity(city);
+  fetchWeatherByCity(cityName);
 });
 
-// Obsługa przycisku "Go Back"
-goBackButton.addEventListener("click", () => {
-  slideUp.classList.add("active"); // Wyzwól animację
+goBackButton.addEventListener('click', () => {
+  slideUp.classList.add('active');
   setTimeout(() => {
-    searchResult.classList.remove("active"); // Ukryj wyniki wyszukiwania
-    inputSearch.value = ""; // Wyczyść pole wyszukiwania
-    errorMessageSpan.textContent = ""; // Wyczyść błędy
-    slideUp.classList.remove("active"); // Cofnij animację
-    window.location.href = "index.html"; // Przekieruj do index.html
-    searchPerformed = false; // Zresetuj flagę wyszukiwania
-    goBacToSearchbar.style.display = 'none'; // Ukryj przycisk "Go Back to Search bar"
-  }, 800); // Czas trwania animacji ustawiony na 800ms
-});
-
-// Obsługa przycisku "Go Back to Searchbar"
-goBacToSearchbar.addEventListener("click", () => {
-  if (searchPerformed) { // Sprawdź, czy wykonano wyszukiwanie
-    searchResult.classList.remove("active"); // Ukryj wyniki wyszukiwania
-    inputSearch.value = ""; // Wyczyść pole wyszukiwania
-    errorMessageSpan.textContent = ""; // Wyczyść błędy
-    searchPerformed = false; // Zresetuj flagę wyszukiwania
-    goBacToSearchbar.style.display = 'none'; // Ukryj przycisk "Go Back to Search bar"
-  } else {
-    console.warn("Nie wykonano jeszcze wyszukiwania. Nie można wrócić do paska wyszukiwania.");
-  }
+    window.location.href = './searchpage.html'; // Powrót do strony wyszukiwania
+  }, 800);
 });

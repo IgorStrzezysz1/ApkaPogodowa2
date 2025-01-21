@@ -5,10 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Weather Search</title>
   <link rel="stylesheet" href="./styles.css">
-
   <script src="./searchpage.js" defer></script>
   <style>
-    /* Stylizacja dla animacji slide-up */
     .slide-up {
       position: fixed;
       bottom: 0;
@@ -33,7 +31,7 @@
   <main>
     <form id="searchForm">
       <input type="text" id="cityInput" class="input-search" placeholder="Enter city name" required>
-      <button type="submit" id="btn-search">Search</button>
+      <button type="submit" id="searchButton">Search</button>
     </form>
     <div id="searchResult" class="slide-up"> 
       <p class="weatherLocation">Loading location...</p>
@@ -41,12 +39,13 @@
       <p class="weatherTemp">Loading temperature...</p>
       <p class="weatherInfo">Loading weather info...</p>
       <img class="weatherImg" alt="Weather Icon">
-      <button id="goBacToSearchbar">Go Back to Search bar</button> 
+      <button id="goBackButton">Go Back to Search bar</button> 
       <span class="error-message"></span>
     </div>
     <button id="goBackButton">Go Back</button> 
   </main>
 
   <div class="slide-up" id="slideUpAnimation"></div>
+  <script src="./searchpage.js"></script>
 </body>
 </html>

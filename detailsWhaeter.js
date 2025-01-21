@@ -8,9 +8,8 @@ const weatherWindSpeed = document.querySelector('.weatherWindSpeed');
 const weatherImg = document.querySelector('.weatherImg');
 const slideUp = document.getElementById('slideUpAnimation');
 const goBackButton = document.getElementById('goBackButton');
-const cityInput = document.getElementById('cityInput');
-const searchButton = document.getElementById('searchButton');
 
+// Funkcja pobierania pogody na podstawie współrzędnych geograficznych
 async function fetchWeatherByCoords(position) {
   const { latitude, longitude } = position.coords;
   const apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`;
@@ -25,20 +24,7 @@ async function fetchWeatherByCoords(position) {
   }
 }
 
-async function fetchWeatherByCity(cityName) {
-  const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=metric`;
-
-  try {
-    const response = await fetch(apiUrl);
-    if (!response.ok) throw new Error('City not found');
-    const data = await response.json();
-    updateWeatherUI(data);
-  } catch (error) {
-    console.error('Error fetching weather data for city:', error);
-    alert('City not found or error fetching data');
-  }
-}
-
+// Funkcja aktualizująca interfejs użytkownika na podstawie danych o pogodzie
 function updateWeatherUI(data) {
   weatherLocation.textContent = `Location: ${data.name}`;
   weatherCountry.textContent = `Country: ${data.sys.country}`;
@@ -50,15 +36,7 @@ function updateWeatherUI(data) {
   weatherImg.alt = data.weather[0].description;
 }
 
-searchButton.addEventListener('click', () => {
-  const cityName = cityInput.value.trim();
-  if (!cityName) {
-    alert('Please enter a city name');
-    return;
-  }
-  fetchWeatherByCity(cityName);
-});
-
+// Obsługa przycisku powrotu
 goBackButton.addEventListener('click', () => {
   console.log('Go Back button clicked'); // Debugowanie
   slideUp.classList.add('active');
@@ -69,9 +47,12 @@ goBackButton.addEventListener('click', () => {
   }, 800);
 });
 
-
+// Sprawdzanie, czy geolokalizacja jest dostępna w przeglądarce
 if ('geolocation' in navigator) {
   navigator.geolocation.getCurrentPosition(fetchWeatherByCoords, (error) => {
     console.error('Error getting location:', error);
+    alert('Unable to retrieve your location.');
   });
+} else {
+  alert('Geolocation is not supported by your browser.');
 }
