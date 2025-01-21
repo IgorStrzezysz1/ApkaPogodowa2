@@ -60,15 +60,15 @@ searchButton.addEventListener('click', () => {
 });
 
 goBackButton.addEventListener('click', () => {
+  console.log('Go Back button clicked'); // Debugowanie
   slideUp.classList.add('active');
   setTimeout(() => {
-    if (document.referrer) {
-      window.location.href = document.referrer;
-    } else {
-      window.location.href = './index.html';
-    }
+    const referrer = document.referrer || './index.html';
+    console.log('Redirecting to:', referrer); // Debugowanie
+    window.location.href = referrer;
   }, 800);
 });
+
 
 if ('geolocation' in navigator) {
   navigator.geolocation.getCurrentPosition(fetchWeatherByCoords, (error) => {
