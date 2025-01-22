@@ -29,20 +29,22 @@
     <h1>Weather Search</h1>
   </header>
   <main>
-    <form id="searchForm">
+    <div id="searchForm">
       <input type="text" id="cityInput" class="input-search" placeholder="Enter city name" required>
       <button type="submit" id="searchButton">Search</button>
-    </form>
-    <div id="searchResult" class="slide-up"> 
+    </div>
+    <div id="searchResult"> 
       <p class="weatherLocation">Loading location...</p>
       <p class="weatherCountry">Loading country...</p>
       <p class="weatherTemp">Loading temperature...</p>
       <p class="weatherInfo">Loading weather info...</p>
+      <p class="weatherWindSpeed">Loading weather Wind Speed info...</p>
+      <p class="weatherTempFeelLike">Loading weatherTemp Feel Like info...</p>
       <img class="weatherImg" alt="Weather Icon">
+      <br>
       <button id="goBackButton">Go Back to Search bar</button> 
       <span class="error-message"></span>
     </div>
-    <button id="goBackButton">Go Back</button> 
   </main>
 
   <div class="slide-up" id="slideUpAnimation"></div>
