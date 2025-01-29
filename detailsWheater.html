@@ -1,68 +1,35 @@
 <!DOCTYPE html>
 <html lang="pl">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Weather's Details</title>
   <link rel="manifest" href="./manifest.json">
-    <link rel="stylesheet" href="./styles.css">
-  <style>
-    .slide-up {
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(135deg, #bba45a, #87CEEB);
-      transform: translateY(100%);
-      transition: transform 0.8s ease-in-out;
-      z-index: 9999;
-    }
-
-    .slide-up.active {
-      transform: translateY(0);
-    }
-
-    #weatherDetails {
-      margin: 20px;
-    }
-
-    input[type="text"],
-    button {
-      padding: 10px;
-      margin: 5px 0;
-      font-size: 16px;
-    }
-
-    button {
-      cursor: pointer;
-      background-color: #87CEEB;
-      border: none;
-      border-radius: 5px;
-      color: white;
-    }
-
-    button:hover {
-      background-color: #4682B4;
-    }
-  </style>
+  <link rel="stylesheet" href="./styles.css">
 </head>
+
 <body>
   <header>
     <h1>Weather's Details</h1>
   </header>
   <main>
     <div id="weatherDetails">
-    
-      <p class="weatherLocation">Loading location...</p>
-      <p class="weatherCountry">Loading country...</p>
-      <p class="weatherTemp">Loading temperature...</p>
-      <p class="weatherTempFeelLike">Loading feels like...</p>
-      <p class="weatherInfo">Loading weather info...</p>
-      <p class="weatherWindSpeed">Loading wind speed...</p>
-      <img class="weatherImg" alt="Weather Icon">
+      <p class="error-message"></p>
+      <p class="weatherLocation"></p>
+      <p class="weatherCountry"></p>
+      <p class="weatherTemp"></p>
+      <p class="weatherTempFeelLike"></p>
+      <p class="weatherInfo"></p>
+      <p class="weatherWindSpeed"></p>
+      <img class="weatherImg" id="weatherImg" style="opacity:0" alt="Weather Icon"><br>
+      <button id="fetchWeatherButton">Fetch Weather</button>
       <button id="goBackButton">Go Back</button>
     </div>
   </main>
 
   <div class="slide-up" id="slideUpAnimation"></div>
-  <script src="./detailsWhaeter.js"></script>
+  <script src="detailsWhaeter.js"></script>
 </body>
+
 </html>

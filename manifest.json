@@ -1,23 +1,35 @@
 {
-    "name": "Weather App",
-    "short_name": "Weather",
-    "description": "A Progressive Web App for checking weather conditions.",
-    "start_url": "/index.html",
-    "display": "standalone",
-    "background_color": "#ffffff",
-    "theme_color": "#4CAF50",
-    "icons":[
+  "name": "Weather App",
+  "short_name": "Weather",
+  "description": "A Progressive Web App for checking weather conditions.",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#4CAF50",
+  "icons": [
     {
       "src": "/icon.png",
       "type": "image/png",
-      "sizes": "192x192"
+      "sizes": "512x512"
     },
     {
       "src": "/icon.png",
       "type": "image/png",
       "sizes": "512x512"
     }
+  ],
+  "screenshots": [
+    {
+      "src": "/screenshots/mobile-view.png",
+      "sizes": "379x750",
+      "type": "image/png",
+      "form_factor": "narrow"
+    },
+    {
+      "src": "/screenshots/desktop-view.png",
+      "sizes": "1920x1080",
+      "type": "image/png",
+      "form_factor": "wide"
+    }
   ]
-  }
-
- 
+}

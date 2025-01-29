@@ -1,25 +1,16 @@
-
-.page {
-    opacity: 1; /* Strona jest widoczna */
-    transform: translateY(0); /* Pozycja początkowa */
-    
-    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out; /* Czas trwania i płynność animacji */
-}
-.page.exit {
-    opacity: 0; /* Strona staje się niewidoczna */
-    transform: translateY(-20px); /* Przesunięcie strony w górę */
-}
+/* General Styling */
 body {
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
     background: linear-gradient(135deg, #4CAF50, #87CEEB);
-    color: #fff;
+    color: white;
     text-align: center;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
 }
+
 header {
     background-color: rgba(0, 0, 0, 0.3);
     padding: 20px;
@@ -30,6 +21,7 @@ header h1 {
     margin: 0;
     font-size: 2.5rem;
 }
+
 main {
     flex: 1;
     padding: 20px;
@@ -44,7 +36,6 @@ section {
     max-width: 600px;
 }
 
-/* Przycisk */
 button {
     background-color: #ffffff;
     color: #4CAF50;
@@ -62,7 +53,6 @@ button:hover {
     transform: scale(1.05);
 }
 
-/* Teksty */
 h2 {
     margin-top: 0;
     font-size: 1.8rem;
@@ -73,15 +63,61 @@ p {
     margin: 10px 0;
 }
 
-/* Stopka */
-footer {
-    background-color: rgba(0, 0, 0, 0.3);
-    padding: 10px;
-    font-size: 0.9rem;
-    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.2);
+/* Button Styling */
+footer button {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-/* Responsywność */
+footer button:hover {
+    background-color: #45a049;
+}
+
+/* Slide-up Animation */
+.slide-up {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #bba45a, #87CEEB);
+    transform: translateY(100%);
+    transition: transform 0.8s ease-in-out;
+    z-index: 9999;
+}
+
+input[type="text"] {
+    border-radius: 5px;
+    padding: 10px 20px;
+}
+
+.slide-up.active {
+    transform: translateY(0);
+}
+
+.slide-down {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #bba45a, #87CEEB);
+    transform: translateY(-100%);
+    transition: transform 0.8s ease-in-out;
+    z-index: 9999;
+}
+
+.slide-down.active {
+    transform: translateY(0);
+}
+
+/* Responsiveness */
 @media (max-width: 768px) {
     header h1 {
         font-size: 2rem;
@@ -92,102 +128,28 @@ footer {
         padding: 8px 16px;
     }
 
+    input[type="text"] {
+        padding: 7px 15px;
+    }
+
     section {
         padding: 15px;
     }
 }
-.page {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    color: white;
-    font-family: Arial, sans-serif;
-  }
-  
-  .navigate-button {
-    margin-top: 20px;
-    padding: 10px 20px;
-    font-size: 16px;
-    color: white;
-    background-color: #4caf50;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .navigate-button:hover {
-    background-color: #45a049;
-  }
-  /* Podstawowe style */
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    overflow-x: hidden;
+
+.error-message {
+    color: red;
+    font-size: 18px;
 }
 
-.page.enter {
-    opacity: 0;
-    transform: translateX(100%);
-}
+@media (max-width:540px) {
+    #location {
+        display: flex;
+        flex-direction: column;
+    }
 
-.page.enter-active {
-    opacity: 1;
-    transform: translateX(0);
+    #location button {
+        margin: 20px;
+        height: 50px;
+    }
 }
-
-footer button {
-    padding: 10px 20px;
-    font-size: 16px;
-    color: white;
-    background-color: #4caf50;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-footer button:hover {
-    background-color: #45a049;
-}
-.slide-up {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, #bba45a, #87CEEB);
-    transform: translateY(100%);
-    transition: transform 0.8s ease-in-out;
-    z-index: 9999;
-}
-
-.slide-up.active {
-    transform: translateY(0);
-}
-/* Stylizacja dla animacji slide-up */
-.slide-up {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, #bba45a, #87CEEB);
-    transform: translateY(100%);
-    transition: transform 0.8s ease-in-out;
-    z-index: 9999;
-}
-
-.slide-up.active {
-    transform: translateY(0); /* Pozostaje widoczny */
-}
-
-#goBackToSearchBar {
-  position: relative; /* Upewnij się, że przycisk jest pozycjonowany względem swojego rodzica */
-  z-index: 1; /* Ustaw wyższy z-index, aby przycisk był na wierzchu */
-  background-color: white; /* Przykładowy kolor tła przycisku */
-  /* ... inne style */
-}
-

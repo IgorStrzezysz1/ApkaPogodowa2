@@ -4,32 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#4CAF50">
-    <link rel="manifest" href="./manifest.json">
     <title>Weather App</title>
+    <link rel="manifest" href="./manifest.json">
     <link rel="stylesheet" href="./styles.css">
-    <style>
-        body {
-            margin: 0;
-            overflow: hidden;
-        }
-
-        .slide-down {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #bba45a, #87CEEB);
-            transform: translateY(-100%);
-            transition: transform 0.8s ease-in-out;
-            z-index: 9999;
-        }
-
-        .slide-down.active {
-            transform: translateY(0);
-        }
-    </style>
 </head>
 
 <body>
@@ -48,8 +25,28 @@
     <div class="slide-down" id="slideDownAnimation"></div>
 
     <script>
-        const slideDown = document.getElementById('slideDownAnimation');
+        // Request notification permission
+        if ('Notification' in window) {
+            Notification.requestPermission().then((permission) => {
+                if (permission === 'granted') {
+                    console.log('Notification permission granted.');
+                } else if (permission === 'denied') {
+                    console.warn('Notification permission denied.');
+                } else {
+                    console.log('Notification permission dismissed.');
+                }
+            }).catch((error) => {
+                console.error('Error requesting notification permission:', error);
+            });
+        } else {
+            console.error('This browser does not support notifications.');
+        }
 
+        const slideDown = document.getElementById('slideDownAnimation');
+        const detailWeatherButton = document.getElementById('detailWeatherButton');
+        const searchWeatherButton = document.getElementById('navigate-to-search');
+
+        // Function to navigate with animation
         const navigateWithAnimation = (url) => {
             slideDown.classList.add('active');
             setTimeout(() => {
@@ -57,19 +54,23 @@
             }, 800);
         };
 
+        // Event listener for "Details of Weather" button
         document.getElementById('detailWeatherButton').addEventListener('click', () => {
             navigateWithAnimation('./detailsWheater.html');
         });
 
+        // Event listener for "Go to Weather Search" button
         document.getElementById('navigate-to-search').addEventListener('click', () => {
             navigateWithAnimation('./searchpage.html');
         });
 
+        // Event listener for "Weather History" button
         document.getElementById('navigate-to-history').addEventListener('click', () => {
             navigateWithAnimation('./historyWheater.html');
         });
+
     </script>
-    <script src="./javascript.js"></script>
+    <script src="app.js"></script>
 </body>
 
 </html>
