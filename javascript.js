@@ -1,4 +1,4 @@
-const slideDown = document.getElementById('slideDownAnimation');
+//const slideDown = document.getElementById('slideDownAnimation');
 const slideUp = document.getElementById('slideUpAnimation');
 const locationButton = document.getElementById('getLocation');
 const weatherInfo = document.getElementById('weatherInfo');
@@ -15,15 +15,15 @@ const goBackButton = document.getElementById('goBackButton');
 
 const apiKey = '83a4e536c6cc9f7b61410fa93df99220'; // OpenWeatherMap API key
 
-// Funkcja do uruchamiania animacji i przekierowywania
-const navigateWithAnimation = (url) => {
-    if (slideDown) {
-        slideDown.classList.add('active'); // Uruchomienie animacji
-        setTimeout(() => {
-            window.location.href = url; // Przekierowanie po zakończeniu animacji
-        }, 800); // Czas trwania animacji w ms
-    }
-};
+// // Funkcja do uruchamiania animacji i przekierowywania
+// const navigateWithAnimation = (url) => {
+//     if (slideDown) {
+//         slideDown.classList.add('active'); // Uruchomienie animacji
+//         setTimeout(() => {
+//             window.location.href = url; // Przekierowanie po zakończeniu animacji
+//         }, 800); // Czas trwania animacji w ms
+//     }
+// };
 
 // Obsługa przycisków na stronie głównej
 if (document.getElementById('detailWeatherButton')) {
